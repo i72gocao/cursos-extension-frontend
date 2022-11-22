@@ -1,0 +1,8 @@
+.portada-hero{
+    background-image: url("../../assets/universidad.jpg");
+    /* width: 100%; */
+    /* background-repeat: no-repeat; */
+    /* object-fit: cover; */
+    background-size: cover;
+
+}
