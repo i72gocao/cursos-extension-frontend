@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import cursos from "../../assets/curso-extension.jpg"
+import AuthContext from "../../context/AuthContext";
 
 import "./style.css";
 
 const TagCourse = () => {
+  
+  const {auth} = useContext(AuthContext);
 
   return (
     <div className="col">
@@ -38,12 +41,18 @@ const TagCourse = () => {
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
               {/* <Link to={`/pages/course-subscripcion/${id}`} */}
-              <Link to={`/pages/course-subscripcion/1`}
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
-                Inscribirse
-              </Link>
+              {auth ? 
+                <Link to={`/pages/course-subscripcion/1`} className="btn btn-sm btn-outline-secondary">
+                  Inscribirse
+                </Link>
+              :
+                <button disabled="disabled" type="button" className="btn btn-sm btn-outline-secondary">
+                  Inscribirse
+                </button>
+              }
+
+
+
               {/* <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
@@ -52,7 +61,7 @@ const TagCourse = () => {
               </button> */}
             </div>
             <div className="d-flex flex-column align-items-end">
-                <small className="text-muted"><span className="fw-bold">INICIO: </span>22/11/20222</small>
+                <small className="text-muted"><span className="fw-bold">INICIO: </span>22/11/2022</small>
                 <small className="text-muted"><i className="fas fa-restroom"></i> 0/10</small>
             </div>
           </div>
