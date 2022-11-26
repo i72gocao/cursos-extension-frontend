@@ -5,7 +5,6 @@ import AuthContext from '../context/AuthContext'
 const PersistentAdmin = () => {
   
   const {auth} = useContext(AuthContext);
-  console.log("username: ",auth.username)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,12 +16,7 @@ const PersistentAdmin = () => {
   
   return (
     <>
-      {auth.username !== "admin" ? 
-        <Outlet/>
-        : 
-        <h1>Bienvenido Admin</h1>
-      }
-        
+      <Outlet/>
     </>
   )
 }

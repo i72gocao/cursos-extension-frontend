@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import AuthService from '../../services/auth.service'
@@ -6,6 +6,29 @@ import AuthService from '../../services/auth.service'
 import "./style.css"
 
 const LinkAllUsers = ({user}) => {
+
+    const [count,setCount] = useState(0);
+
+    useEffect(() => {
+      try {
+        
+        fetch(process.env.REACT_APP_API_COUNT_MESSAGE,{
+            method:"GET",
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("DATATAAAAAAAAAAAAAAAAAAAAA: ",data)
+            setCount(data.data[0]["n_id"])
+        });
+
+      } catch (error) {
+        console.log("Ha ocurrido un error en la consulta");
+      }
+    }, [])
+    
 
   return (
     <div className="col-sm-4 offset-md-1 py-4">
@@ -34,7 +57,7 @@ const LinkAllUsers = ({user}) => {
                 </li>
                 <li>
                     <Link to="/admin/pages/messages" className="text-white text-decoration-none hover-link-user">
-                        Ver mensajes
+                        Ver mensajes <span className="badge badge-light bg-danger">{count}</span>
                     </Link>
                 </li>
             </>)

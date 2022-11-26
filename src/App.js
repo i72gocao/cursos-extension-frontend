@@ -14,9 +14,10 @@ import PersistentAuth from './pages/PersistentAuth';
 import PersistentAdmin from './pages/PersistentAdmin';
 
 import ManageCourses from "./pages/admin/ManageCourses";
-import Message from "./pages/admin/Message";
+import ListMessage from "./pages/admin/ListMessage";
 import ListaCursos from './routes/ListaCursos';
 import Logout from './pages/Logout';
+import AddUser from './pages/AddUser';
 
 let router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,7 +42,7 @@ let router = createBrowserRouter(
 
       <Route element={<PersistentAdmin/>} errorElement={<Error403/>}>
         <Route path="/admin/pages/manage-courses" element={<ManageCourses/>}/>
-        <Route path="/admin/pages/messages" element={<Message/>}/>
+        <Route path="/admin/pages/messages" element={<ListMessage/>}/>
         <Route path="/authentication/user/logout" element={<Logout/>}/>
       </Route>
     </Route>
