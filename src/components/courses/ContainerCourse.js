@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TagCourse from "./TagCourse";
 
-const dataCourse = {
-  id:"",
-  titulo:"",
-  descripcion:"",
-  precio:"",
-  fecha_inicio:"",
-  fecha_fin:"",
-  fecha_limite_subscripcion:"",
-  min_participantes:"",
-  max_participantes:"",
-  imagen_portada:""
-}
+
 //Faltaria hacer la consulta para obtener el numero de miembros inscritos en un determinad curso
 
 const ContainerCourse = () => {

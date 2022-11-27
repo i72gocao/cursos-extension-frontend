@@ -48,6 +48,25 @@ const RowData = ({i,index,fullname,username,email,setData,data}) => {
         updateData(data,ID);
     }
 
+    const handleDeleteMessage = (e) => {
+        const ID = $id.current.id;
+        try {
+            fetch(process.env.REACT_APP_API_DELETE_MESSAGE,{
+                method: "DELETE",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({id:ID})
+            })
+            .then(res => res.json())
+            .then(data => console.log("ELIMINACION: ",data));
+
+        } catch (error) {
+            console.log("Error en el servidor al intentar eliminar un mensaje");
+        }
+        updateData(data,ID);
+    }
+
     return (
         <tr>
             <th scope="row">{i+1}</th>
@@ -57,7 +76,7 @@ const RowData = ({i,index,fullname,username,email,setData,data}) => {
             <td>
                 <button ref={$id} onClick={handleUser} className="btn btn-dark" id={index}><i className="fas fa-check-double"></i></button>
                 &nbsp;
-                <button onClick={handleUser} className="btn btn-dark" id={index}><i className="fas fa-eraser"></i></button>
+                <button onClick={handleDeleteMessage} className="btn btn-dark" id={index}><i className="fas fa-eraser"></i></button>
             </td>
         </tr>
     )

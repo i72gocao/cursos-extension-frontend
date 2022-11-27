@@ -3,7 +3,7 @@ import Header from '../../components/header/Header'
 import Layout from '../../components/layout/Layout'
 import Message from '../../components/message/Message';
 
-const ListMessage = () => {
+const ManageMessage = () => {
   
   const [data,setData] = useState([]);
 
@@ -42,4 +42,4 @@ const ListMessage = () => {
   )
 }
 
-export default ListMessage
+export default ManageMessage

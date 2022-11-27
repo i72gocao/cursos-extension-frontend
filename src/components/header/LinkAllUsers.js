@@ -20,7 +20,6 @@ const LinkAllUsers = ({user}) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log("DATATAAAAAAAAAAAAAAAAAAAAA: ",data)
             setCount(data.data[0]["n_id"])
         });
 
@@ -56,7 +55,7 @@ const LinkAllUsers = ({user}) => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin/pages/messages" className="text-white text-decoration-none hover-link-user">
+                    <Link to="/admin/pages/manage-messages" className="text-white text-decoration-none hover-link-user">
                         Ver mensajes <span className="badge badge-light bg-danger">{count}</span>
                     </Link>
                 </li>

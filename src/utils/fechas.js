@@ -13,6 +13,20 @@ export const fechaFormatoInternacional = (fecha) => {
     return dia + "/" + mes + "/" + fechas.getFullYear();
 }
 
+export const fechaFormatoCourse = (fecha) => {
+    const fechas = new Date(fecha);
+    let dia = fechas.getDate() < 10 ? `0${fechas.getDate()}` : fechas.getDate();
+    let mes = parseInt(fechas.getMonth())+1;
+    return fechas.getFullYear().toString() + "-" + mes.toString() + "-" + dia.toString();
+}
+
+export const fechaFormatoCourseRev = (fecha) => {
+    const fechas = new Date(fecha);
+    let dia = fechas.getDate() < 10 ? `0${fechas.getDate()}` : fechas.getDate();
+    let mes = parseInt(fechas.getMonth())+1;
+    return dia + "-" + mes + "-" + fechas.getFullYear();
+}
+
 export const fechasListBlog = (fecha,lang) => {
     const fechas = new Date(fecha);
     let day = fechas.getDate() < 10 ? `0${fechas.getDate()}` : fechas.getDate();
