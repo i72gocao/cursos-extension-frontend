@@ -27,7 +27,6 @@ const Contactar = () => {
         
         for(let prop in form){
             if(form[prop] === ""){
-                console.log("vacio");
                 return;
             }
         }
@@ -75,7 +74,7 @@ const Contactar = () => {
             </div>
             <div className="form-group mb-3">
                 <label htmlFor="emailUCO">Correo Electrónico</label>
-                <input type="email" onChange={handleInput} value={form.email} className="form-control" id="emailUCO" name="email" aria-describedby="emailHelp" placeholder="example@uco.es"/>
+                <input type="email" onChange={handleInput} value={form.email} className="form-control" id="emailUCO" name="email" aria-describedby="emailHelp" placeholder="example@uco.es" pattern="[a-z][0-9]{2}[a-z]{5}@uco.es"/>
             </div>
             
             <button type="submit" className="btn btn-primary">Submit</button>

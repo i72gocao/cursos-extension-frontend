@@ -11,7 +11,7 @@ const Message = ({data,setData}) => {
                         <th scope="col">Nombre</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Email</th>
-                        <th></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>

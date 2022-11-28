@@ -31,8 +31,7 @@ const ContainerCourse = () => {
             <TagCourse/>
             <TagCourse/>
             <TagCourse/>
-            {data.map((e,i) => <TagCourse key={i} id={e.id} titulo={e.titulo} fecha_inicio={e.fecha_inicio} max_participantes={e.max_participantes}/>)}
-            {/* {data.map((e,i) => console.log("Element: ",e))} */}
+            {data.map((e,i) => <TagCourse key={i} id={e.id} titulo={e.titulo} imagen={e.imagen_portada} fecha_inicio={e.fecha_inicio} max_participantes={e.max_participantes}/>)}
         </div>
       </div>
     </div>

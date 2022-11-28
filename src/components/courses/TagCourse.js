@@ -7,29 +7,14 @@ import { fechaFormatoInternacional } from "../../utils/fechas";
 
 import "./style.css";
 
-const TagCourse = ({id,titulo,fecha_inicio,max_participantes}) => {
+const TagCourse = ({id,titulo,fecha_inicio,imagen,max_participantes}) => {
   const {auth} = useContext(AuthContext);
 
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <img src={cursos} alt="curso de extension" className="bd-placeholder-img card-img-top"/>
-        {/* <svg
-          className="bd-placeholder-img card-img-top"
-          width="100%"
-          height="225"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: Thumbnail"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false"
-        >
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#55595c"></rect>
-          <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-            Thumbnail
-          </text>
-        </svg> */}
+        
+        <img src={imagen ? `${process.env.REACT_APP_API_DOMAIN}/uploads/public/images/${imagen}` : cursos} alt="curso de extension" className="bd-placeholder-img card-img-top"/>
 
         <div className="card-body">
           <p className="card-text">

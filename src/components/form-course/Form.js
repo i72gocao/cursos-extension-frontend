@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import axios from "axios";
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 
-const Form = ({form,setForm,isCreate,urlForm,setOk}) => {
+const Form = ({form,setForm,isCreate,urlForm,setOk, metadata}) => {
 
     
     const [loadImage,setLoadImage] = useState(null);
@@ -11,6 +10,14 @@ const Form = ({form,setForm,isCreate,urlForm,setOk}) => {
     
     const fechas = (fecha) => {
         return fecha.slice(0,10);
+    }
+
+    const formDataToJSON = (formData) => {
+        let object = {};
+        formData.forEach(function(value, key){
+            object[key] = value;
+        });
+        return JSON.stringify(object);
     }
 
     const handleChange = (e) => {
@@ -27,23 +34,29 @@ const Form = ({form,setForm,isCreate,urlForm,setOk}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            
             let formData = new FormData();
-            formData.append("file",loadImage);
+            if(isCreate)
+                formData.append("file",loadImage);
+
             for(let key in form)
                 formData.append(`${key}`,form[key])
+
+            if(!isCreate)
+                formData = formDataToJSON(formData);
             
-            await fetch(urlForm,{
-                method:"POST",
-                body: formData
-            }).then(res => res.json())
-            .then(data => {
-                if(data.status === "OK"){
-                    setOk(true);
-                    setTimeout(() => {
-                        navigate("/admin/pages/manage-courses");
-                    },5000);
-                }
-            })
+            metadata["body"] = formData;
+
+            await fetch(urlForm,metadata)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.status === "OK"){
+                        setOk(true);
+                        setTimeout(() => {
+                            navigate("/admin/pages/manage-courses");
+                        },5000);
+                    }
+                })
 
         } catch (error) {   
             console.log(error)
@@ -84,10 +97,14 @@ const Form = ({form,setForm,isCreate,urlForm,setOk}) => {
                 <label htmlFor="maxPar">Participantes Máximo</label>
                 <input onChange={handleChange} type="text" className="form-control mb-3" name="max_participantes" id="maxPar" placeholder="Introduce Maximo Participantes" defaultValue={form.max_participantes}/>
             </div>
-            <div className="form-group">
-                <label htmlFor="imagen">Imagen identificativa</label>
-                <input onChange={handleUploadImage} type="file" className="form-control mb-3" name="imagen_portada" id="imagen_portada" placeholder="Selecciona imagen"/>
-            </div>
+            {isCreate ? 
+                <div className="form-group">
+                    <label htmlFor="imagen">Imagen identificativa</label>
+                    <input onChange={handleUploadImage} type="file" className="form-control mb-3" name="imagen_portada" id="imagen_portada" placeholder="Selecciona imagen"/>
+                </div>
+                : 
+                ""
+            }
             <button type="submit" className="btn btn-primary">{isCreate ? "Crear Datos" : "Modificar Datos"}</button>
         </form>
     )

@@ -46,7 +46,6 @@ const UpdateCourse = () => {
       ...form,
       [e.target.name] : e.target.value
     })
-    // console.log("Dentro: ",form);
   }
   
   
