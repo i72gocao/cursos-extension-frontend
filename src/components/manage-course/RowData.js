@@ -37,15 +37,21 @@ const RowData = ({i,id,titulo,min_participantes,max_participantes,updateData,set
         <tr>
             <th scope="row">{i+1}</th>
             <td>{titulo}</td>
-            <td>{min_participantes}</td>
-            <td>{max_participantes}</td>
+            <td className='text-center'>{min_participantes}</td>
+            <td className='text-center'>{max_participantes}</td>
             <td>
-                <Link to={`/admin/pages/manage-courses/update/${id}`} className="btn btn-dark">
-                    <i className="fas fa-pencil-alt"></i>
-                </Link>
-                {/* <button ref={$id} onClick={handleUpdate} className="btn btn-dark" id={id}><i className="fas fa-check-double"></i></button> */}
-                &nbsp;
-                <button ref={$id} onClick={handleDelete} className="btn btn-dark" id={id}><i className="fas fa-eraser"></i></button>
+                <div className="d-flex justify-content-center">
+                    <div title="Modificar curso">
+                        <Link to={`/admin/pages/manage-courses/update/${id}`} className="btn btn-dark">
+                            <i className="fas fa-pencil-alt"></i>
+                        </Link>
+                    </div>
+                    {/* <button ref={$id} onClick={handleUpdate} className="btn btn-dark" id={id}><i className="fas fa-check-double"></i></button> */}
+                    &nbsp;
+                    <div title="Borrar curso">
+                        <button ref={$id} onClick={handleDelete} className="btn btn-dark" id={id}><i className="fas fa-eraser"></i></button>
+                    </div>
+                </div>
             </td>
         </tr>
     )

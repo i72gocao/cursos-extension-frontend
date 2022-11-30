@@ -22,12 +22,12 @@ const Course = ({data,setData}) => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Titulo</th>
-                    <th scope="col">Participantes Min</th>
-                    <th scope="col">Participantes Max</th>
-                    <th>Acciones</th>
+                    <th className='text-center' scope="col">Participantes Min</th>
+                    <th className='text-center' scope="col">Participantes Max</th>
+                    <th className='text-center'>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className='align-middle'>
                 {data.length === 0 ? <Info/> : data.map((e,i) => <RowData key={i} i={i} id={e.id} titulo={e.titulo} min_participantes={e.min_participantes} max_participantes={e.max_participantes} updateData={updateData} setData={setData} data={data}/>)}
             </tbody>
         </table>

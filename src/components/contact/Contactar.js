@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router';
 const formValue = {
     fullname : "",
     username: "",
-    email: ""
+    email: "",
+    rol: ""
 }
 const Contactar = () => {
     
     const [form,setForm] = useState(formValue);
     const [data, setData] = useState(null);
+    const [roles,setRoles] = useState([]);
 
     const $alert = useRef();
 
@@ -52,6 +54,21 @@ const Contactar = () => {
 
     useEffect(() => {
         // console.log(form);
+        try {
+            fetch(process.env.REACT_APP_API_LOAD_ROLES,{
+                method: "GET",
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(async rolData => {
+                await setRoles(rolData.data);
+            })
+        } catch (error) {
+            console.log("Error causado en el servidor")
+        }
+
         setTimeout(() => {
             if(data !== null)
                 navigate("/");
@@ -64,6 +81,9 @@ const Contactar = () => {
             <div ref={$alert} className="alert alert-primary d-none form-group mb-3" role="alert">
                 EL formulario de petición de registro ha sido enviado.
             </div>
+            <div className='mb-5'>
+                <h3>Formulario de Petición de Registro</h3>
+            </div>
             <div className="form-group mb-3">
                 <label htmlFor="fullname">Nombre completo</label>
                 <input type="text" onChange={handleInput} value={form.fullname} className="form-control" id="fullname" name="fullname" placeholder="Nombres y apellidos"/>
@@ -75,6 +95,13 @@ const Contactar = () => {
             <div className="form-group mb-3">
                 <label htmlFor="emailUCO">Correo Electrónico</label>
                 <input type="email" onChange={handleInput} value={form.email} className="form-control" id="emailUCO" name="email" aria-describedby="emailHelp" placeholder="example@uco.es" pattern="[a-z][0-9]{2}[a-z]{5}@uco.es"/>
+            </div>
+            <div className="form-group mb-3 bg-danger">
+                <label htmlFor="usuarioTipo">Tipo de usuario</label>
+                <select className="form-select" aria-label="Default select example" name="rol" onChange={handleInput}>
+                    <option defaultValue>Open this select menu</option>
+                    {roles.length > 0 ? roles.map((e,i) => <option key={i} value={e.id}>{e.name}</option>) : ""}
+                </select>
             </div>
             
             <button type="submit" className="btn btn-primary">Submit</button>

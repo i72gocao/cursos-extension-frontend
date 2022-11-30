@@ -74,9 +74,15 @@ const RowData = ({i,index,fullname,username,email,setData,data}) => {
             <td>{username}</td>
             <td>{email}</td>
             <td>
-                <button ref={$id} onClick={handleUser} className="btn btn-dark" id={index}><i className="fas fa-check-double"></i></button>
-                &nbsp;
-                <button onClick={handleDeleteMessage} className="btn btn-dark" id={index}><i className="fas fa-eraser"></i></button>
+                <div className='d-flex'>
+                    <div title="Aceptar mensaje">
+                        <button ref={$id} onClick={handleUser} className="btn btn-dark" id={index}><i className="fas fa-check-double"></i></button>
+                    </div>
+                    &nbsp;
+                    <div title="Borrar mensaje">
+                        <button onClick={handleDeleteMessage} className="btn btn-dark" id={index}><i className="fas fa-eraser"></i></button>
+                    </div>
+                </div>
             </td>
         </tr>
     )
