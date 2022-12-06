@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../../context/AuthContext'
+import MessageContext from '../../context/MessageContext'
 
 import AuthService from '../../services/auth.service'
 
@@ -9,24 +12,32 @@ const LinkAllUsers = ({user}) => {
 
     const [count,setCount] = useState(0);
 
+    const {message} = useContext(MessageContext);
+    const {auth} = useContext(AuthContext);
+    
     useEffect(() => {
-      try {
+        if(auth.id === 1){
+            try {
+                
+                fetch(process.env.REACT_APP_API_COUNT_MESSAGE,{
+                    method:"GET",
+                    headers: {
+                        "Content-Type":"application/json"
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    setCount(data.data[0]["n_id"])
+                });
         
-        fetch(process.env.REACT_APP_API_COUNT_MESSAGE,{
-            method:"GET",
-            headers: {
-                "Content-Type":"application/json"
+            } catch (error) {
+                console.log("Ha ocurrido un error en la consulta");
             }
-        })
-        .then(res => res.json())
-        .then(data => {
-            setCount(data.data[0]["n_id"])
-        });
+        }
 
-      } catch (error) {
-        console.log("Ha ocurrido un error en la consulta");
-      }
-    }, [])
+        if(auth.id > 1)
+            setCount(message ? message.length : 0)
+    }, [message])
     
 
   return (
@@ -65,6 +76,11 @@ const LinkAllUsers = ({user}) => {
                 <li>
                     <Link to="/pages/course-subscripcion/mis-cursos" className="text-white text-decoration-none hover-link-user">
                         Mis cursos
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/pages/user/message" className="text-white text-decoration-none hover-link-user">
+                        Ver mensajes <span className="badge badge-light bg-danger">{count}</span>
                     </Link>
                 </li>
             </>

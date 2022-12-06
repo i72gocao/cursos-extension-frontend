@@ -99,7 +99,7 @@ const Contactar = () => {
             <div className="form-group mb-3 bg-danger">
                 <label htmlFor="usuarioTipo">Tipo de usuario</label>
                 <select className="form-select" aria-label="Default select example" name="rol" onChange={handleInput}>
-                    <option defaultValue>Open this select menu</option>
+                    <option defaultValue>-- Rol de usuario --</option>
                     {roles.length > 0 ? roles.map((e,i) => <option key={i} value={e.id}>{e.name}</option>) : ""}
                 </select>
             </div>

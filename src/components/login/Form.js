@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
+import MessageContext from "../../context/MessageContext";
 
 import AuthService from "../../services/auth.service";
+import MessageService from "../../services/message.service";
 
 const initForm = {
   email: "",
@@ -11,7 +13,9 @@ const initForm = {
 
 const Form = () => {
   const [form, setForm] = useState(initForm);
+  
   const { setAuth } = useContext(AuthContext);
+  const {setMessage, setContent} = useContext(MessageContext);
 
   const navigate = useNavigate();
 
@@ -21,6 +25,26 @@ const Form = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  /******************************** */
+  /*const getMessage = (idUser) => {
+    
+    fetch(process.env.REACT_APP_API_MESSAGE_USER_ALL,{
+      method: "GET",
+      headers: {
+        "Content-Type":"application/json",
+        "userid":idUser
+      }
+    })
+    .then(res => res.json())
+    .then(result => {
+      console.log("adsasdasd: ",result)
+      setMessage(result.data.length === 0 ? [] : result.data[0].Messages);
+      MessageService.setMessageLS(result.data.length === 0 ? [] : result.data[0].Messages);
+      setContent(result);
+    })
+  }*/
+  /******************************** */
 
   const handleFormSignin = (e) => {
     e.preventDefault();
@@ -37,17 +61,18 @@ const Form = () => {
         body: JSON.stringify(form),
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log("Obteniendo datos: ", data.message);
-          setAuth(data.data);
-          AuthService.setUser(data.data);
-          navigate("/");
+        .then(async (data) => {
+          if(data.data){
+            setAuth(data.data);
+            MessageService.getMessageByUser(data.data.id ? data.data.id : [],setMessage,setContent);
+            AuthService.setUser(data.data);
+            navigate("/");
+          }else{
+            navigate("/error/page/401");
+          }
         });
     } catch (error) {
         console.log("No se pudo realizar el login");
-        setTimeout(() => {
-            navigate("/error/authorization/401");
-        }, 1000);
     }
   };
   return (

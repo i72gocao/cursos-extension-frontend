@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout";
 import AuthContext from "../context/AuthContext";
 
 import AuthService from "../services/auth.service";
+import MessageService from "../services/message.service";
 
 const Logout = () => {
     const {setAuth} = useContext(AuthContext);
@@ -14,10 +15,11 @@ const Logout = () => {
     useEffect(() => {
         
         service.removeUser();
+        MessageService.removeMessageLS();
         setAuth(false);
         let timeout = setTimeout(() => {
-            //navigate("/");
-        }, 3000);
+            navigate("/");
+        }, 1000);
         
 
     }, [navigate, service]);

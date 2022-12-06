@@ -1,5 +1,5 @@
 const setUser = (user) => {
-    delete user.id;
+    
     delete user.password;
     delete user.createdAt;
     delete user.updatedAt;
