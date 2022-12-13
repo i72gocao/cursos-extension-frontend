@@ -1,12 +1,20 @@
+import { useMemo } from "react";
 import { createContext, useState } from "react";
 
 import AuthService from "../services/auth.service";
 
-const AuthContext = createContext();
+const data = {
+    id: 2,
+    email: 'user@uco.es',
+    username: 'a12tutim',
+    fullname: 'Timmy Turner'
+}
 
-const AuthProvider = ({children}) => {
+const AuthContext = createContext(data);
 
-    const [auth,setAuth] = useState(AuthService.getUser() || false);
+const AuthProvider = ({children, value}) => {
+
+    const [auth,setAuth] = useState(AuthService.getUser() || value || false);
 
     const data = {auth,setAuth};
 

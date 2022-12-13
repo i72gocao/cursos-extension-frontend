@@ -16,7 +16,7 @@ const LinkAllUsers = ({user}) => {
     const {auth} = useContext(AuthContext);
     
     useEffect(() => {
-        if(auth.id === 1){
+        if(user.id === 1){
             try {
                 
                 fetch(process.env.REACT_APP_API_COUNT_MESSAGE,{
@@ -35,27 +35,15 @@ const LinkAllUsers = ({user}) => {
             }
         }
 
-        if(auth.id > 1)
+        if(user.id > 1)
             setCount(message ? message.length : 0)
     }, [message])
     
 
   return (
     <div className="col-sm-4 offset-md-1 py-4">
-    <h4 className="text-white">Hola {AuthService.getUser().username}</h4>
+    <h4 className="text-white username">Hola {user.email}</h4>
 
-    {/* 
-      El admin puede ir a las rutas:
-      -Gestionar los cursos ya sea crear, modificar, borrar o actualizar.
-      -Revisar los mensajes obtenidos de los usuarios. 
-
-      Los usuarios participantes pueden:
-      -Ir a la lista de cursos donde estan matriculados
-
-      Los usuarios visitantes solo pueden:
-      -Ir a la ruta de contactar con el admin.
-
-    */}
     <ul className="list-unstyled">
         {
             user.username === "admin" ? 
