@@ -59,6 +59,9 @@ const UpdateCourse = () => {
               <strong>Well Done!</strong> Se ha guardado con éxito los datos.
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div> 
+            <div className='mb-4'>
+              <h3><i className='fas fa-pencil-alt'></i> Modificar Curso de Extensión</h3>
+            </div> 
             <Form form={form} setForm={setForm} isCreate={false} urlForm={process.env.REACT_APP_API_UPDATE_COURSE} setOk={setOk} metadata={metadata}/>
          </div>
         </div>

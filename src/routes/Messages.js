@@ -10,7 +10,11 @@ const Messages = () => {
     <div className="album py-5">
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
-          <div></div>
+          <div>
+            <div className='mb-4 fw-bold'>
+              <h2><i className='fas fa-mail-bulk'></i> Lista de Mensajes</h2>
+            </div>
+          </div>
           <Message/>
         </div>
       </div>

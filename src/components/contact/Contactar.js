@@ -5,14 +5,14 @@ const formValue = {
     fullname : "",
     username: "",
     email: "",
-    rol: ""
+    
 }
 //Poner '{handleSubmit}' en los parametros de la arrow function
 const Contactar = () => {
     
     const [form,setForm] = useState(formValue);
     const [data, setData] = useState(null);
-    const [roles,setRoles] = useState([]);
+    // const [roles,setRoles] = useState([]);
 
     const $alert = useRef();
 
@@ -66,7 +66,7 @@ const Contactar = () => {
             })
             .then(res => res.json())
             .then(async rolData => {
-                await setRoles(rolData.data);
+                // await setRoles(rolData.data);
             })
         } catch (error) {
             console.log("Error causado en el servidor")
@@ -100,13 +100,13 @@ const Contactar = () => {
                 <label htmlFor="emailUCO">Correo Electrónico</label>
                 <input type="email" onChange={handleInput} value={form.email} aria-label="email" className="form-control" id="emailUCO" name="email" aria-describedby="emailHelp" placeholder="example@uco.es" pattern="[a-z][0-9]{2}[a-z]{5}@uco.es"/>
             </div>
-            <div className="form-group mb-3 bg-danger">
+            {/* <div className="form-group mb-3 bg-danger">
                 <label htmlFor="usuarioTipo">Tipo de usuario</label>
                 <select className="form-select" aria-label="Default select example" name="rol" onChange={handleInput}>
                     <option defaultValue>-- Rol de usuario --</option>
                     {roles.length > 0 ? roles.map((e,i) => <option key={i} value={e.id}>{e.name}</option>) : ""}
                 </select>
-            </div>
+            </div> */}
             
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>

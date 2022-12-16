@@ -12,6 +12,9 @@ const ListaCursos = () => {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
             <div>        
+              <div className='mb-4 fw-bold'>
+                <h2><i className='fas fa-list'></i> Mi lista de cursos</h2>
+              </div>
             </div>
             <ListCourse />
           </div>

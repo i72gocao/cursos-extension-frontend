@@ -147,7 +147,7 @@ const Course = () => {
               <div>
                 <div className='d-flex align-items-baseline'>
                   <p className='fw-bold'>Precio: &nbsp; </p>
-                  <h4>{res.precio}0€</h4>
+                  <h4>{res.precio}€</h4>
                 </div>
               </div>
 

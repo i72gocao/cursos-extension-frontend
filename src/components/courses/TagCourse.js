@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import cursos from "../../assets/curso-extension.jpg"
 import AuthContext from "../../context/AuthContext";
 import MessageContext from "../../context/MessageContext";
 import MessageService from "../../services/message.service";
 import { fechaFormatoInternacional } from "../../utils/fechas";
+
+import cursos from "../../assets/curso-extension.jpg"
 
 import "./style.css";
 

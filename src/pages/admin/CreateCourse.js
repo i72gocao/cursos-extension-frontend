@@ -4,7 +4,7 @@ import Header from '../../components/header/Header';
 import Layout from '../../components/layout/Layout';
 
 const dataCourse = {
-    id:"",
+    id:"0",
     titulo:"",
     descripcion:"",
     precio:"",
@@ -13,14 +13,14 @@ const dataCourse = {
     fecha_limite_subscripcion:"",
     min_participantes:"",
     max_participantes:"",
-    imagen_portada:""
+    imagen_portada:null
 }
 
 const CreateCourse = () => {
 
     const metadata = {
         method: "POST",
-      }
+    }
 
     const [form,setForm] = useState(dataCourse);
     const [ok,setOk] = useState(null);   
@@ -46,6 +46,10 @@ const CreateCourse = () => {
                         <div className={`alert alert-primary alert-dismissible fade show ${clase}`} role="alert">
                             <strong>Well Done!</strong> Se ha guardado con éxito los datos.
                             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div className='mb-4'>
+                            {/* <h3><i className='fas fa-less-than'></i>CrearCursoExtension/<i className='fas fa-greater-than'></i></h3> */}
+                            <h3><i className='fas fa-plus'></i> Crear Curso de Extensión</h3>
                         </div> 
                         <Form form={form} setForm={setForm} isCreate={true} urlForm={process.env.REACT_APP_API_CREATE_COURSE} setOk={setOk} metadata={metadata}/>
                     </div>
