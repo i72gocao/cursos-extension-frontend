@@ -1,8 +1,8 @@
 # Proyecto Curso de extension de UCO
 ### Proyecto desarrollado con reactjs.
-El presente proyecto ha sido desarrollado en su totalidad con el lenguaje de programaci�n JavaScript, utilizando la librer�a ReactJs para el frontend y NodeJs Express para el backend. 
+El presente proyecto ha sido desarrollado en su totalidad con el lenguaje de programación JavaScript, utilizando la librería ReactJs para el frontend y NodeJs Express para el backend. 
 
-A continuaci�n se muestra en videos el manejo de la aplicaci�n de acuerdo a los usuarios que se han creado:
+A continuación se muestra en videos el manejo de la aplicación de acuerdo a los usuarios que se han creado:
 
 #### Demostración de Visitante
 [![Alt text](https://img.youtube.com/vi/ejlvofsQ6JQ/0.jpg)](https://youtu.be/ejlvofsQ6JQ)
