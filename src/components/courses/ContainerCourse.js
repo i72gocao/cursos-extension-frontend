@@ -1,64 +1,23 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+
 import AuthContext from "../../context/AuthContext";
 import TagCourse from "./TagCourse";
 
-
-//Faltaria hacer la consulta para obtener el numero de miembros inscritos en un determinad curso
+import CourseService from "../../services/courses.service"
 
 const ContainerCourse = () => {
 
   const [data,setData] = useState([]);
   const {auth} = useContext(AuthContext); 
-  // const [authentication,setAuthentication] = useState(auth ? auth : false);
-  
-  
 
+  
   useEffect(() => {
-    function getAllCourses() {
-      try {
-        fetch(process.env.REACT_APP_API_LOAD_HOME,{
-          methd: "GET",
-          headers: {
-            "Content-Type":"application/json"
-          }
-        }).then(res => res.json())
-        .then(data => {
-          setData(data.data);
-        })
-      } catch (error) {
-        console.log("Ha ocurrido un error al cargar los datos en el Home");
-      }
-    }
-  
-    function getAllCoursesByUser() {
-      try {
-        fetch(process.env.REACT_APP_API_SHOW_COURSE_BY_USER,{
-          method: "GET",
-          headers: {
-            "Content-Type":"application/json",
-            "id": auth.id
-          }
-        }).then(res => res.json())
-        .then(data => {
-          setData(data.data);
-        })
-      } catch (error) {
-        console.log("Ha ocurrido un error al cargar los datos en el Home");
-      }
-    }
-
-    // const example = document.querySelector("#multiCollapseExample1");
-    // setTimeout(()=> {
-    //   example.classList.add("collapsing");
-    //   example.classList.remove("collapsing");
-    //   example.classList.remove("show");
-    // },5000)
-    
+    const {getAllCoursesByUser,getAllCourses} = CourseService;
+        
     if(auth){
-      getAllCoursesByUser()
+      getAllCoursesByUser(auth.id,setData)
     }else
-      getAllCourses()
+      getAllCourses(setData)
       
   },[auth]);
   
@@ -80,12 +39,18 @@ const ContainerCourse = () => {
               </div>
             </div>
           </div>  
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              {/* <TagCourse/>
-              <TagCourse/>
-              <TagCourse/> */}
-              {data.map((e,i) => <TagCourse key={i} id={e.id} titulo={e.titulo} imagen={e.imagen_portada} fecha_inicio={e.fecha_inicio} max_participantes={e.max_participantes} min_participantes={e.min_participantes}/>)}
-          </div>
+          {
+            data.length === 0 && auth ? 
+            (<div className="text-center p-4 mt-4">
+              <div>
+                <h3>No se encuentran más cursos disponibles para que se pueda inscribir</h3>
+              </div>
+            </div>)
+            :
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              {data.map((e,i) => <TagCourse key={i} id={e.id} titulo={e.titulo} imagen={e.imagen_portada} fecha_inicio={e.fecha_inicio} max_participantes={e.max_participantes} min_participantes={e.min_participantes} data={data} setData={setData}/>)}
+            </div>
+          }
         </div>
       </div>
     </>

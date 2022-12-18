@@ -22,7 +22,7 @@ const getMessageByUser = (idUser,setMessage,setContent) => {
     })
     .then(res => res.json())
     .then(result => {
-      console.log("Entro desde servicio: ",result)
+      
       setMessage(result.data.length === 0 ? [] : result.data[0].Messages);
       setMessageLS(result.data.length === 0 ? [] : result.data[0].Messages);
       setContent(result);

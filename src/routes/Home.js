@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ContainerCourse from '../components/courses/ContainerCourse'
 import Header from '../components/header/Header'
 import Hero from '../components/hero/Hero'

@@ -10,7 +10,7 @@ import cursos from "../../assets/curso-extension.jpg"
 
 import "./style.css";
 
-const TagCourse = ({id,titulo,fecha_inicio,imagen,max_participantes,min_participantes}) => {
+const TagCourse = ({id,titulo,fecha_inicio,imagen,max_participantes,min_participantes,data,setData}) => {
 
   const {auth} = useContext(AuthContext);
   const {setMessage,setContent} = useContext(MessageContext);
@@ -21,7 +21,13 @@ const TagCourse = ({id,titulo,fecha_inicio,imagen,max_participantes,min_particip
 
   const navigate = useNavigate();
 
+  const showCourses = (id) => {
+    setData(data.filter((e,i) => e.id !== parseInt(id)))
+  }
+
   const handleInscription = (e) => {
+    
+    showCourses(e.target.id)
     try {
       fetch(process.env.REACT_APP_API_ADD_USER_COURSE,{
         method: "POST",
@@ -35,11 +41,11 @@ const TagCourse = ({id,titulo,fecha_inicio,imagen,max_participantes,min_particip
       }).then(res => res.json())
       .then(data => {
 
-        if(data.status === "OK"){
+        if(data.status === "OK"){          
           MessageService.getMessageByUser(auth.id,setMessage,setContent);
           navigate("/")
         }else{
-          navigate("")
+          navigate("/")
         }
       })
 
